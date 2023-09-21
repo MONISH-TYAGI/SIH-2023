@@ -7,6 +7,32 @@ const App = () => {
   const [videoStream, setVideoStream] = useState(null);
   const [showChatbot, setShowChatbot] = useState(false);
   const videoRef = React.createRef();
+  const [availCases,setAvail]=useState([
+    {
+         "id":1234,
+
+    },
+    {
+            "id":1235,
+    },
+    {
+            "id":1236
+    }
+  ]);
+  const [totalCases,setTotal]=useState([
+    {
+          "id":2234,
+    },{
+          "id":2235,
+    }
+    ,{
+          "id":2236,
+    }
+    ,
+    {
+          "id":2237,
+    }
+  ]);
 
   useEffect(() => {
     if (cameraOn) {
@@ -124,47 +150,32 @@ const App = () => {
         {/* Video */}
      
       </div>
+
       <div className="w-1/2 bg-white p-4 overflow-y-auto">
         <div className='h-1/2'>
         <h1 className="text-2xl font-semibold mb-4">Available Cases</h1>
         <div className="space-y-4">
           {/* Sample blocks - replace with your own */}
-          <div className="bg-gray-200  rounded-lg shadow flex ">
-            <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
-                <span>Case ID:55034
-                </span>
-                </div>
-            <div className=' w-2/4 flex items-center place-content-around  '> 
-            <button className='bg-green-600 rounded-lg p-1 w-1/2 text-white'>Send Link</button>
-            <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white' onClick={openCalendar}>Reschedule</button>
-            <CalendarComponent isOpen={isCalendarOpen} onClose={closeCalendar} />
-            
-</div>
-          </div>
-          <div className="bg-gray-200  rounded-lg shadow flex ">
-            <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
-                <span>Case ID:55035
-                </span>
-                </div>
-            <div className=' w-2/4 flex items-center place-content-around  '> 
-            <button className='bg-green-600 rounded-lg p-1 w-1/2 text-white'>Send Link</button>
-            <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white' onClick={openCalendar}>Reschedule</button>
-            <CalendarComponent isOpen={isCalendarOpen} onClose={closeCalendar} />
-            
-</div>
-          </div>
-          <div className="bg-gray-200  rounded-lg shadow flex ">
-            <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
-                <span>Case ID:55035
-                </span>
-                </div>
-            <div className=' w-2/4 flex items-center place-content-around  '> 
-            <button className='bg-green-600 rounded-lg p-1 w-1/2 text-white'>Send Link</button>
-            <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white' onClick={openCalendar}>Reschedule</button>
-            <CalendarComponent isOpen={isCalendarOpen} onClose={closeCalendar} />
-            
-</div>
-          </div>
+          {
+                  availCases.map((item,index)=>(
+                    <div className="bg-gray-200  rounded-lg shadow flex ">
+                    <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
+                        <span>Case ID:{item.id}
+                        </span>
+                        </div>
+                      
+                    <div className=' w-2/4 flex items-center place-content-around   '> 
+                    <button className='bg-green-600 rounded-lg p-1 w-1/2 text-white m-1'>Join</button>
+                    <button className='bg-green-600 rounded-lg p-1 w-1/2 text-white '> Put it in End</button>
+                    <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white' onClick={openCalendar}>Reschedule</button>
+                    <CalendarComponent isOpen={isCalendarOpen} onClose={closeCalendar} availCases={availCases} setAvail={setAvail} id={item.id}/>
+                    
+        </div>
+                  </div>
+                  ))
+                  }
+                
+      
           
           
           {/* Add more blocks as needed */}
@@ -174,40 +185,24 @@ const App = () => {
                     <h1 className="text-2xl font-semibold mb-4">Total Cases</h1>
         <div className="space-y-4">
           {/* Sample blocks - replace with your own */}
-          <div className="bg-gray-200  rounded-lg shadow flex ">
-            <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
-                <span>Case ID:55035
-                </span>
-                </div>
-            <div className=' w-2/4 flex items-center place-content-end mr-4  '> 
-       
-            <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white'  onClick={openCalendar}>Reschedule</button>
-            <CalendarComponent isOpen={isCalendarOpen} onClose={closeCalendar} />
-            
-</div>
-          </div>
-          <div className="bg-gray-200  rounded-lg shadow flex ">
-            <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
-                <span>Case ID:55035
-                </span>
-                </div>
-            <div className=' w-2/4 flex items-center place-content-end mr-4  '> 
-            
-            <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white'>Reschedule</button>
-            
-</div>
-          </div>
-          <div className="bg-gray-200  rounded-lg shadow flex ">
-            <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
-                <span>Case ID:55035
-                </span>
-                </div>
-            <div className=' w-2/4 flex items-center place-content-end mr-4  '> 
-            
-            <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white'>Reschedule</button>
-            
-</div>
-          </div>
+          {
+                  totalCases.map((item,index)=>(
+                    <div className="bg-gray-200  rounded-lg shadow flex ">
+                    <div className=' w-2/4 h-12 flex items-center pl-4 rounded-lg'>
+                        <span>Case ID:{item.id}
+                        </span>
+                        </div>
+                      
+                    <div className=' w-2/4 flex items-center place-content-end mr-2   '> 
+                
+                    <button className='bg-red-600 rounded-lg p-1 w-1/2 ml-2 text-white' onClick={openCalendar}>Reschedule</button>
+                    <CalendarComponent isOpen={isCalendarOpen} onClose={closeCalendar} availCases={totalCases} setAvail={setTotal} id={item.id}/>
+                    
+        </div>
+                  </div>
+                  ))
+                  }
+  
         
           {/* Add more blocks as needed */}
         </div>
